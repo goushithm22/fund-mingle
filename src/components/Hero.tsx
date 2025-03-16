@@ -12,9 +12,7 @@ const Hero = () => {
             
             <div className="space-y-6 mt-6 opacity-0 animate-fade-in-slow">
               <p className="text-lg md:text-xl text-[#666666] leading-relaxed">Discover the easiest way to connect with the right investors or founders. No noise, just real opportunities.</p>
-              <p className="text-lg md:text-xl text-[#666666] leading-relaxed">
-                Transforming innovative ideas into successful ventures.
-              </p>
+              
               
               <div className="pt-4">
                 <Button className="button-hover rounded-md text-base font-medium px-6 py-5 bg-[#ff4141] hover:bg-[#ff4141]/90 text-white">
