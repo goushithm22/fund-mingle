@@ -25,7 +25,7 @@ const Navbar = () => {
           <Button variant="ghost" className="link-underline font-medium text-foreground/80 hover:text-foreground hover:bg-transparent transition-colors" size="sm">
             Sign In
           </Button>
-          <Button size="sm" className="button-hover font-medium bg-primary rounded-md px-4 py-2 text-sm transition-all text-white">
+          <Button size="sm" className="button-hover font-medium rounded-md px-4 py-2 text-sm transition-all text-white text-justify bg-[#ff4141]">
             Register
           </Button>
         </div>
