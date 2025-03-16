@@ -171,7 +171,7 @@ const AnimatedIllustration = () => {
           textAnchor="middle"
           dominantBaseline="middle"
           fontSize="24"
-          fill="hsl(var(--primary))"
+          fill="#ff4141"
           fontWeight="bold"
           className="opacity-0 animate-fade-in"
           style={{ animationDelay: "2s" }}
@@ -179,53 +179,97 @@ const AnimatedIllustration = () => {
           $
         </text>
         
-        {/* Small texts */}
+        {/* Small texts - Making these more visible with background and larger font */}
+        <rect
+          x="380"
+          y="100"
+          width="40"
+          height="20"
+          rx="4"
+          fill="white"
+          className="opacity-0 animate-fade-in"
+          style={{ animationDelay: "2.1s" }}
+        />
         <text
           x="400"
-          y="120"
+          y="115"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSize="10"
-          fill="hsl(var(--primary))"
+          fontSize="14"
+          fill="#333333"
+          fontWeight="600"
           className="opacity-0 animate-fade-in"
           style={{ animationDelay: "2.2s" }}
         >
           IDEA
         </text>
         
+        <rect
+          x="185"
+          y="290"
+          width="70"
+          height="20"
+          rx="4"
+          fill="white"
+          className="opacity-0 animate-fade-in"
+          style={{ animationDelay: "2.3s" }}
+        />
         <text
           x="220"
           y="300"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSize="10"
-          fill="hsl(var(--primary))"
+          fontSize="14"
+          fill="#333333"
+          fontWeight="600"
           className="opacity-0 animate-fade-in"
           style={{ animationDelay: "2.4s" }}
         >
           FOUNDERS
         </text>
         
+        <rect
+          x="545"
+          y="290"
+          width="70"
+          height="20"
+          rx="4"
+          fill="white"
+          className="opacity-0 animate-fade-in"
+          style={{ animationDelay: "2.5s" }}
+        />
         <text
           x="580"
           y="300"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSize="10"
-          fill="hsl(var(--primary))"
+          fontSize="14"
+          fill="#333333"
+          fontWeight="600"
           className="opacity-0 animate-fade-in"
           style={{ animationDelay: "2.6s" }}
         >
           INVESTORS
         </text>
         
+        <rect
+          x="380"
+          y="470"
+          width="40"
+          height="20"
+          rx="4"
+          fill="white"
+          className="opacity-0 animate-fade-in"
+          style={{ animationDelay: "2.7s" }}
+        />
         <text
           x="400"
           y="480"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSize="10"
-          fill="hsl(var(--primary))"
+          fontSize="14"
+          fill="#333333"
+          fontWeight="600"
           className="opacity-0 animate-fade-in"
           style={{ animationDelay: "2.8s" }}
         >
