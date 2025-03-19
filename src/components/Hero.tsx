@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 import AnimatedIllustration from "./AnimatedIllustration";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -68,9 +69,12 @@ const Hero = () => {
                   Get Started
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
-                <Button variant="outline" className="rounded-md text-base font-medium px-6 py-5 border-gray-200 text-gray-800 hover:bg-gray-50">
-                  Learn More
-                </Button>
+                
+                <Link to="/investor-dashboard">
+                  <Button variant="outline" className="rounded-md text-base font-medium px-6 py-5 border-gray-200 text-gray-800 hover:bg-gray-50 w-full sm:w-auto">
+                    Investor Dashboard
+                  </Button>
+                </Link>
               </div>
               
               <div className="pt-4 flex items-center gap-2 text-sm text-gray-500">
