@@ -192,8 +192,10 @@ const PortfolioPerformance = () => {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip
-                  formatter={(value) => [`${value}%`, 'Allocation']}
+                <Tooltip 
+                  formatter={(value) => {
+                    return [`${value}%`, 'Allocation'];
+                  }}
                 />
               </PieChart>
             </div>
