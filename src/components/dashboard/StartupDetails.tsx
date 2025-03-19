@@ -93,6 +93,31 @@ const metricsData = [
 const StartupDetails = () => {
   const [selectedStartup, setSelectedStartup] = React.useState(startupData[0]);
   
+  // Vanilla JS functions
+  function handleSelectStartup(startup) {
+    setSelectedStartup(startup);
+  }
+  
+  function handleScheduleCall(founderName) {
+    console.log(`Scheduling call with ${founderName}`);
+    // Implementation would go here
+  }
+  
+  function handleMessageFounder(founderName) {
+    console.log(`Messaging ${founderName}`);
+    // Implementation would go here
+  }
+  
+  function handleViewTeam(startupName) {
+    console.log(`Viewing team for ${startupName}`);
+    // Implementation would go here
+  }
+  
+  function handleInvest(startupName) {
+    console.log(`Investing in ${startupName}`);
+    // Implementation would go here
+  }
+  
   return (
     <div className="space-y-4">
       {/* Startups Table */}
@@ -134,7 +159,7 @@ const StartupDetails = () => {
                 <TableRow 
                   key={startup.id} 
                   className={selectedStartup.id === startup.id ? "bg-gray-50" : ""}
-                  onClick={() => setSelectedStartup(startup)}
+                  onClick={() => handleSelectStartup(startup)}
                 >
                   <TableCell>
                     <div className="flex items-center gap-2">
@@ -194,19 +219,39 @@ const StartupDetails = () => {
               <div className="space-y-2">
                 <h4 className="text-sm font-medium">Quick Actions</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <Button variant="outline" size="sm" className="text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs"
+                    onClick={() => handleScheduleCall(selectedStartup.founders)}
+                  >
                     <Calendar className="h-3 w-3 mr-1" />
                     Schedule
                   </Button>
-                  <Button variant="outline" size="sm" className="text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs"
+                    onClick={() => handleMessageFounder(selectedStartup.founders)}
+                  >
                     <MessageSquare className="h-3 w-3 mr-1" />
                     Message
                   </Button>
-                  <Button variant="outline" size="sm" className="text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs"
+                    onClick={() => handleViewTeam(selectedStartup.name)}
+                  >
                     <Users className="h-3 w-3 mr-1" />
                     Team
                   </Button>
-                  <Button variant="outline" size="sm" className="text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs"
+                    onClick={() => handleInvest(selectedStartup.name)}
+                  >
                     <DollarSign className="h-3 w-3 mr-1" />
                     Invest
                   </Button>

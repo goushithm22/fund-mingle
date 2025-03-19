@@ -94,6 +94,17 @@ const pastDealsData = [
 ];
 
 const InvestmentOpportunities = () => {
+  // Vanilla JS function to view opportunity details
+  function viewOpportunityDetails(id) {
+    console.log(`Viewing details for opportunity ${id}`);
+    // Implementation would go here
+  }
+  
+  // Vanilla JS function to format date
+  function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString();
+  }
+
   return (
     <div className="space-y-4">
       {/* New Opportunities */}
@@ -136,7 +147,10 @@ const InvestmentOpportunities = () => {
               </div>
             </CardContent>
             <CardFooter className="border-t pt-4">
-              <Button className="w-full bg-[#ff4141] hover:bg-[#ff4141]/90">
+              <Button 
+                className="w-full bg-[#ff4141] hover:bg-[#ff4141]/90"
+                onClick={() => viewOpportunityDetails(opportunity.id)}
+              >
                 <DollarSign className="h-4 w-4 mr-2" />
                 View Details
               </Button>
@@ -185,7 +199,7 @@ const InvestmentOpportunities = () => {
                     </span>
                   </TableCell>
                   <TableCell>{deal.returns}</TableCell>
-                  <TableCell>{new Date(deal.date).toLocaleDateString()}</TableCell>
+                  <TableCell>{formatDate(deal.date)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

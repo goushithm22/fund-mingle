@@ -70,22 +70,22 @@ const connectionsData = [
   },
 ];
 
-// Vanilla JavaScript formatter function for the tooltip
-const formatTooltipValue = (value) => {
-  return [`${value}%`, 'Interest'];
-};
-
 const ConnectionsOverview = () => {
   // Vanilla JS functions
-  const handleScheduleCall = (name) => {
+  function handleScheduleCall(name) {
     console.log(`Scheduling call with ${name}`);
     // Here you would typically open a scheduling modal or redirect
-  };
+  }
 
-  const handleMessageFounder = (name) => {
+  function handleMessageFounder(name) {
     console.log(`Messaging ${name}`);
     // Here you would typically open a messaging interface
-  };
+  }
+
+  // Format tooltip values function for the chart
+  function formatTooltipValue(value) {
+    return [`${value}%`, 'Interest'];
+  }
 
   return (
     <div className="space-y-4">
@@ -176,7 +176,7 @@ const ConnectionsOverview = () => {
                     ))}
                   </Pie>
                   <Tooltip 
-                    formatter={(value) => formatTooltipValue(value)}
+                    formatter={formatTooltipValue}
                   />
                 </PieChart>
               </ResponsiveContainer>
