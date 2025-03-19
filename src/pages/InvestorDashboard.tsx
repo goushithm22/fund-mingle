@@ -3,13 +3,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
-  ChartLine,
-  ChartBar,
-  DollarSign,
-  Users,
   ChartPie,
+  Users,
   MessageSquare,
   Calendar,
+  Handshake,
+  Search,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,15 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import PortfolioPerformance from "@/components/dashboard/PortfolioPerformance";
+import ConnectionsOverview from "@/components/dashboard/ConnectionsOverview";
 import InvestmentOpportunities from "@/components/dashboard/InvestmentOpportunities";
 import StartupDetails from "@/components/dashboard/StartupDetails";
 
@@ -58,8 +50,8 @@ const InvestorDashboard = () => {
               Schedule
             </Button>
             <Button size="sm" className="bg-[#ff4141] hover:bg-[#ff4141]/90">
-              <DollarSign className="mr-2 h-4 w-4" />
-              Invest Now
+              <Handshake className="mr-2 h-4 w-4" />
+              Connect Now
             </Button>
           </div>
         </div>
@@ -72,29 +64,14 @@ const InvestorDashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Portfolio Value
+                Active Connections
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-[#ff4141]" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$2.4M</div>
-              <p className="text-xs text-muted-foreground">
-                <span className="text-green-500">↑12%</span> from last month
-              </p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">
-                Active Investments
-              </CardTitle>
-              <ChartBar className="h-4 w-4 text-[#ff4141]" />
+              <Users className="h-4 w-4 text-[#ff4141]" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">16</div>
               <p className="text-xs text-muted-foreground">
-                <span className="text-green-500">↑2</span> new this quarter
+                <span className="text-green-500">↑2</span> new this month
               </p>
             </CardContent>
           </Card>
@@ -102,14 +79,29 @@ const InvestorDashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Returns
+                Saved Opportunities
               </CardTitle>
-              <ChartLine className="h-4 w-4 text-[#ff4141]" />
+              <BarChart3 className="h-4 w-4 text-[#ff4141]" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">24.8%</div>
+              <div className="text-2xl font-bold">24</div>
               <p className="text-xs text-muted-foreground">
-                <span className="text-green-500">↑3.2%</span> YTD
+                <span className="text-green-500">↑3</span> this week
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">
+                Industry Interests
+              </CardTitle>
+              <ChartPie className="h-4 w-4 text-[#ff4141]" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">5</div>
+              <p className="text-xs text-muted-foreground">
+                SaaS, Fintech, AI/ML...
               </p>
             </CardContent>
           </Card>
@@ -119,7 +111,7 @@ const InvestorDashboard = () => {
               <CardTitle className="text-sm font-medium">
                 Founders Network
               </CardTitle>
-              <Users className="h-4 w-4 text-[#ff4141]" />
+              <Handshake className="h-4 w-4 text-[#ff4141]" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">124</div>
@@ -131,15 +123,15 @@ const InvestorDashboard = () => {
         </div>
 
         {/* Main Dashboard Content */}
-        <Tabs defaultValue="portfolio" className="space-y-4">
+        <Tabs defaultValue="connections" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
+            <TabsTrigger value="connections">Connections</TabsTrigger>
             <TabsTrigger value="opportunities">Opportunities</TabsTrigger>
             <TabsTrigger value="startups">Startup Details</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="portfolio" className="space-y-4">
-            <PortfolioPerformance />
+          <TabsContent value="connections" className="space-y-4">
+            <ConnectionsOverview />
           </TabsContent>
           
           <TabsContent value="opportunities" className="space-y-4">
