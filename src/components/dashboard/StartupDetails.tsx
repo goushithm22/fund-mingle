@@ -37,10 +37,10 @@ const startupData = [
     logo: "C",
     sector: "AI/ML",
     stage: "Series A",
-    funded: "$3.2M",
-    valuation: "$18M",
-    growth: "+125%",
     founders: "Sarah Chen, David Wu",
+    description: "AI-powered learning platform",
+    employees: "15-30",
+    location: "San Francisco, CA",
     lastUpdate: "3 days ago"
   },
   {
@@ -49,10 +49,10 @@ const startupData = [
     logo: "S",
     sector: "SaaS",
     stage: "Seed",
-    funded: "$750K",
-    valuation: "$5M",
-    growth: "+75%",
     founders: "Michael Johnson",
+    description: "Cross-platform content management tool",
+    employees: "5-10",
+    location: "Austin, TX",
     lastUpdate: "1 week ago"
   },
   {
@@ -61,10 +61,10 @@ const startupData = [
     logo: "F",
     sector: "Fintech",
     stage: "Seed",
-    funded: "$1.2M",
-    valuation: "$8M",
-    growth: "+58%",
     founders: "Jessica Lee, Robert Garcia",
+    description: "NextGen payment processing solution",
+    employees: "10-15",
+    location: "New York, NY",
     lastUpdate: "2 weeks ago"
   },
   {
@@ -73,24 +73,24 @@ const startupData = [
     logo: "M",
     sector: "Healthcare",
     stage: "Pre-seed",
-    funded: "$450K",
-    valuation: "$3M",
-    growth: "+32%",
     founders: "Dr. Emily Taylor",
+    description: "Blockchain for healthcare records",
+    employees: "3-5",
+    location: "Boston, MA",
     lastUpdate: "1 month ago"
   }
 ];
 
 const metricsData = [
-  { month: "Jan", revenue: 12000, users: 2500, expenses: 10000 },
-  { month: "Feb", revenue: 15000, users: 3200, expenses: 11000 },
-  { month: "Mar", revenue: 18000, users: 4300, expenses: 12000 },
-  { month: "Apr", revenue: 24000, users: 5800, expenses: 14000 },
-  { month: "May", revenue: 28000, users: 8200, expenses: 15000 },
-  { month: "Jun", revenue: 35000, users: 12500, expenses: 18000 },
+  { month: "Jan", connections: 3, meetings: 1, messages: 5 },
+  { month: "Feb", connections: 4, meetings: 2, messages: 8 },
+  { month: "Mar", connections: 2, meetings: 2, messages: 10 },
+  { month: "Apr", connections: 5, meetings: 3, messages: 15 },
+  { month: "May", connections: 8, meetings: 5, messages: 20 },
+  { month: "Jun", connections: 10, meetings: 7, messages: 25 },
 ];
 
-const StartupDetails = () => {
+function StartupDetails() {
   const [selectedStartup, setSelectedStartup] = React.useState(startupData[0]);
   
   // Vanilla JS functions
@@ -99,22 +99,22 @@ const StartupDetails = () => {
   }
   
   function handleScheduleCall(founderName) {
-    console.log(`Scheduling call with ${founderName}`);
+    console.log("Scheduling call with " + founderName);
     // Implementation would go here
   }
   
   function handleMessageFounder(founderName) {
-    console.log(`Messaging ${founderName}`);
+    console.log("Messaging " + founderName);
     // Implementation would go here
   }
   
   function handleViewTeam(startupName) {
-    console.log(`Viewing team for ${startupName}`);
+    console.log("Viewing team for " + startupName);
     // Implementation would go here
   }
   
-  function handleInvest(startupName) {
-    console.log(`Investing in ${startupName}`);
+  function handleConnect(startupName) {
+    console.log("Connecting with " + startupName);
     // Implementation would go here
   }
   
@@ -125,8 +125,8 @@ const StartupDetails = () => {
         <CardHeader>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <CardTitle>Portfolio Companies</CardTitle>
-              <CardDescription>Detailed information about your invested startups</CardDescription>
+              <CardTitle>Startup Directory</CardTitle>
+              <CardDescription>Connect with innovative startups</CardDescription>
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm">
@@ -147,39 +147,39 @@ const StartupDetails = () => {
                 <TableHead>Company</TableHead>
                 <TableHead>Sector</TableHead>
                 <TableHead>Stage</TableHead>
-                <TableHead>Total Funding</TableHead>
-                <TableHead>Valuation</TableHead>
-                <TableHead>Growth</TableHead>
+                <TableHead>Founders</TableHead>
+                <TableHead>Location</TableHead>
                 <TableHead>Last Update</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {startupData.map((startup) => (
-                <TableRow 
-                  key={startup.id} 
-                  className={selectedStartup.id === startup.id ? "bg-gray-50" : ""}
-                  onClick={() => handleSelectStartup(startup)}
-                >
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-[#ff4141] flex items-center justify-center text-white font-medium">
-                        {startup.logo}
+              {startupData.map(function(startup) {
+                return (
+                  <TableRow 
+                    key={startup.id} 
+                    className={selectedStartup.id === startup.id ? "bg-gray-50" : ""}
+                    onClick={function() { handleSelectStartup(startup); }}
+                  >
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-[#ff4141] flex items-center justify-center text-white font-medium">
+                          {startup.logo}
+                        </div>
+                        <span className="font-medium">{startup.name}</span>
                       </div>
-                      <span className="font-medium">{startup.name}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>{startup.sector}</TableCell>
-                  <TableCell>{startup.stage}</TableCell>
-                  <TableCell>{startup.funded}</TableCell>
-                  <TableCell>{startup.valuation}</TableCell>
-                  <TableCell className="text-green-600">{startup.growth}</TableCell>
-                  <TableCell>{startup.lastUpdate}</TableCell>
-                  <TableCell>
-                    <Button size="sm" variant="ghost">View</Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                    <TableCell>{startup.sector}</TableCell>
+                    <TableCell>{startup.stage}</TableCell>
+                    <TableCell>{startup.founders}</TableCell>
+                    <TableCell>{startup.location}</TableCell>
+                    <TableCell>{startup.lastUpdate}</TableCell>
+                    <TableCell>
+                      <Button size="sm" variant="ghost">View</Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </CardContent>
@@ -203,14 +203,14 @@ const StartupDetails = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-2 gap-y-4">
-                <div className="text-sm text-muted-foreground">Valuation</div>
-                <div className="text-sm font-medium text-right">{selectedStartup.valuation}</div>
+                <div className="text-sm text-muted-foreground">Description</div>
+                <div className="text-sm font-medium text-right">{selectedStartup.description}</div>
                 
-                <div className="text-sm text-muted-foreground">Total Funding</div>
-                <div className="text-sm font-medium text-right">{selectedStartup.funded}</div>
+                <div className="text-sm text-muted-foreground">Team Size</div>
+                <div className="text-sm font-medium text-right">{selectedStartup.employees}</div>
                 
-                <div className="text-sm text-muted-foreground">Growth Rate</div>
-                <div className="text-sm font-medium text-right text-green-600">{selectedStartup.growth}</div>
+                <div className="text-sm text-muted-foreground">Location</div>
+                <div className="text-sm font-medium text-right">{selectedStartup.location}</div>
                 
                 <div className="text-sm text-muted-foreground">Founders</div>
                 <div className="text-sm font-medium text-right">{selectedStartup.founders}</div>
@@ -223,7 +223,7 @@ const StartupDetails = () => {
                     variant="outline" 
                     size="sm" 
                     className="text-xs"
-                    onClick={() => handleScheduleCall(selectedStartup.founders)}
+                    onClick={function() { handleScheduleCall(selectedStartup.founders); }}
                   >
                     <Calendar className="h-3 w-3 mr-1" />
                     Schedule
@@ -232,7 +232,7 @@ const StartupDetails = () => {
                     variant="outline" 
                     size="sm" 
                     className="text-xs"
-                    onClick={() => handleMessageFounder(selectedStartup.founders)}
+                    onClick={function() { handleMessageFounder(selectedStartup.founders); }}
                   >
                     <MessageSquare className="h-3 w-3 mr-1" />
                     Message
@@ -241,7 +241,7 @@ const StartupDetails = () => {
                     variant="outline" 
                     size="sm" 
                     className="text-xs"
-                    onClick={() => handleViewTeam(selectedStartup.name)}
+                    onClick={function() { handleViewTeam(selectedStartup.name); }}
                   >
                     <Users className="h-3 w-3 mr-1" />
                     Team
@@ -250,39 +250,39 @@ const StartupDetails = () => {
                     variant="outline" 
                     size="sm" 
                     className="text-xs"
-                    onClick={() => handleInvest(selectedStartup.name)}
+                    onClick={function() { handleConnect(selectedStartup.name); }}
                   >
                     <DollarSign className="h-3 w-3 mr-1" />
-                    Invest
+                    Connect
                   </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          {/* Key Metrics */}
+          {/* Engagement Metrics */}
           <Card className="lg:col-span-2">
             <CardHeader>
-              <CardTitle className="text-base">Key Metrics</CardTitle>
-              <CardDescription>Growth trends for {selectedStartup.name}</CardDescription>
+              <CardTitle className="text-base">Engagement Metrics</CardTitle>
+              <CardDescription>Connection history with {selectedStartup.name}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-80">
                 <ChartContainer
                   config={{
-                    revenue: {
+                    connections: {
                       theme: {
                         light: "#ff4141",
                         dark: "#ff4141",
                       },
                     },
-                    users: {
+                    meetings: {
                       theme: {
                         light: "#3498db",
                         dark: "#3498db",
                       },
                     },
-                    expenses: {
+                    messages: {
                       theme: {
                         light: "#f39c12",
                         dark: "#f39c12",
@@ -303,19 +303,19 @@ const StartupDetails = () => {
                     <YAxis />
                     <Tooltip />
                     <Bar
-                      dataKey="revenue"
-                      fill="var(--color-revenue)"
-                      name="Revenue"
+                      dataKey="connections"
+                      fill="var(--color-connections)"
+                      name="Connections"
                     />
                     <Bar 
-                      dataKey="users" 
-                      fill="var(--color-users)" 
-                      name="Users"
+                      dataKey="meetings" 
+                      fill="var(--color-meetings)" 
+                      name="Meetings"
                     />
                     <Bar
-                      dataKey="expenses"
-                      fill="var(--color-expenses)"
-                      name="Expenses"
+                      dataKey="messages"
+                      fill="var(--color-messages)"
+                      name="Messages"
                     />
                   </BarChart>
                 </ChartContainer>
@@ -326,6 +326,6 @@ const StartupDetails = () => {
       )}
     </div>
   );
-};
+}
 
 export default StartupDetails;

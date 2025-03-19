@@ -28,19 +28,19 @@ import {
   Cell
 } from "recharts";
 
-const portfolioData = [
-  { month: "Jan", value: 1000000 },
-  { month: "Feb", value: 1050000 },
-  { month: "Mar", value: 1150000 },
-  { month: "Apr", value: 1250000 },
-  { month: "May", value: 1400000 },
-  { month: "Jun", value: 1550000 },
-  { month: "Jul", value: 1800000 },
-  { month: "Aug", value: 2000000 },
-  { month: "Sep", value: 2200000 },
-  { month: "Oct", value: 2350000 },
-  { month: "Nov", value: 2400000 },
-  { month: "Dec", value: 2400000 },
+const connectionsData = [
+  { month: "Jan", value: 10 },
+  { month: "Feb", value: 15 },
+  { month: "Mar", value: 22 },
+  { month: "Apr", value: 28 },
+  { month: "May", value: 35 },
+  { month: "Jun", value: 42 },
+  { month: "Jul", value: 48 },
+  { month: "Aug", value: 55 },
+  { month: "Sep", value: 62 },
+  { month: "Oct", value: 68 },
+  { month: "Nov", value: 72 },
+  { month: "Dec", value: 80 },
 ];
 
 const allocationData = [
@@ -53,58 +53,63 @@ const allocationData = [
 
 const COLORS = ["#FF4141", "#FF7676", "#FFB4B4", "#FFCACA", "#FFF0F0"];
 
-const investmentsData = [
+const connectionsHistoryData = [
   {
     name: "SeedSync",
     sector: "SaaS",
-    invested: "$350,000",
-    currentValue: "$580,000",
-    roi: "+65.7%",
-    status: "Growing"
+    founder: "Michael Johnson",
+    status: "Active",
+    connected: "Jan 15, 2023",
+    meetings: "5"
   },
   {
     name: "FinovateTech",
     sector: "Fintech",
-    invested: "$280,000",
-    currentValue: "$420,000",
-    roi: "+50.0%",
-    status: "Growing"
+    founder: "Jessica Lee",
+    status: "Active",
+    connected: "Mar 22, 2023",
+    meetings: "3"
   },
   {
     name: "CogniLearn AI",
     sector: "AI/ML",
-    invested: "$400,000",
-    currentValue: "$740,000",
-    roi: "+85.0%",
-    status: "Accelerating"
+    founder: "Sarah Chen",
+    status: "Active",
+    connected: "Nov 10, 2022",
+    meetings: "8"
   },
   {
     name: "MediChain",
     sector: "Healthcare",
-    invested: "$320,000",
-    currentValue: "$290,000",
-    roi: "-9.4%",
-    status: "Recovering"
+    founder: "Dr. Emily Taylor",
+    status: "Inactive",
+    connected: "Feb 5, 2023",
+    meetings: "2"
   },
   {
     name: "GreenScale",
     sector: "CleanTech",
-    invested: "$150,000",
-    currentValue: "$220,000",
-    roi: "+46.7%",
-    status: "Growing"
+    founder: "Michael Brown",
+    status: "Active",
+    connected: "Apr 18, 2023",
+    meetings: "4"
   },
 ];
 
-const PortfolioPerformance = () => {
+function PortfolioPerformance() {
+  // Fix the formatter function to handle string concatenation properly
+  function formatTooltipValue(value) {
+    return [value + "%", "Allocation"];
+  }
+
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Portfolio Growth Chart */}
+        {/* Connections Growth Chart */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Portfolio Growth</CardTitle>
-            <CardDescription>Year-to-date portfolio value</CardDescription>
+            <CardTitle>Network Growth</CardTitle>
+            <CardDescription>Year-to-date connections</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-80">
@@ -119,7 +124,7 @@ const PortfolioPerformance = () => {
                 }}
               >
                 <LineChart
-                  data={portfolioData}
+                  data={connectionsData}
                   margin={{
                     top: 5,
                     right: 10,
@@ -139,15 +144,14 @@ const PortfolioPerformance = () => {
                     fontSize={12}
                     tickLine={false}
                     axisLine={false}
-                    tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
                   />
                   <Tooltip
-                    content={({ active, payload }) => {
+                    content={function({ active, payload }) {
                       if (active && payload && payload.length) {
                         return (
                           <div className="bg-white p-2 border rounded shadow-sm">
-                            <p className="text-xs text-gray-600">{`${payload[0].payload.month}`}</p>
-                            <p className="text-sm font-bold">${(payload[0].value / 1000000).toFixed(2)}M</p>
+                            <p className="text-xs text-gray-600">{payload[0].payload.month}</p>
+                            <p className="text-sm font-bold">{payload[0].value} connections</p>
                           </div>
                         );
                       }
@@ -168,11 +172,11 @@ const PortfolioPerformance = () => {
           </CardContent>
         </Card>
         
-        {/* Portfolio Allocation */}
+        {/* Industry Allocation */}
         <Card>
           <CardHeader>
-            <CardTitle>Sector Allocation</CardTitle>
-            <CardDescription>Distribution by industry</CardDescription>
+            <CardTitle>Sector Distribution</CardTitle>
+            <CardDescription>Connections by industry</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-80 flex items-center justify-center">
@@ -185,29 +189,29 @@ const PortfolioPerformance = () => {
                   outerRadius={80}
                   paddingAngle={2}
                   dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label={function(entry) {
+                    return entry.name + " " + entry.value + "%";
+                  }}
                   labelLine={false}
                 >
-                  {allocationData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
+                  {allocationData.map(function(entry, index) {
+                    return (
+                      <Cell key={"cell-" + index} fill={COLORS[index % COLORS.length]} />
+                    );
+                  })}
                 </Pie>
-                <Tooltip 
-                  formatter={(value) => {
-                    return [`${value}%`, 'Allocation'];
-                  }}
-                />
+                <Tooltip formatter={formatTooltipValue} />
               </PieChart>
             </div>
           </CardContent>
         </Card>
       </div>
       
-      {/* Investment Table */}
+      {/* Connection History Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Active Investments</CardTitle>
-          <CardDescription>Overview of current portfolio companies</CardDescription>
+          <CardTitle>Connection History</CardTitle>
+          <CardDescription>Overview of your startup connections</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
@@ -215,45 +219,39 @@ const PortfolioPerformance = () => {
               <TableRow>
                 <TableHead>Company</TableHead>
                 <TableHead>Sector</TableHead>
-                <TableHead>Amount Invested</TableHead>
-                <TableHead>Current Value</TableHead>
-                <TableHead>ROI</TableHead>
+                <TableHead>Founder</TableHead>
+                <TableHead>Connected Since</TableHead>
+                <TableHead>Meetings</TableHead>
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {investmentsData.map((investment) => (
-                <TableRow key={investment.name}>
-                  <TableCell className="font-medium">{investment.name}</TableCell>
-                  <TableCell>{investment.sector}</TableCell>
-                  <TableCell>{investment.invested}</TableCell>
-                  <TableCell>{investment.currentValue}</TableCell>
-                  <TableCell className={
-                    investment.roi.startsWith("+") 
-                      ? "text-green-600" 
-                      : "text-red-500"
-                  }>
-                    {investment.roi}
-                  </TableCell>
-                  <TableCell>
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      investment.status === "Accelerating" 
-                        ? "bg-green-100 text-green-800" 
-                        : investment.status === "Growing" 
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}>
-                      {investment.status}
-                    </span>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {connectionsHistoryData.map(function(connection) {
+                return (
+                  <TableRow key={connection.name}>
+                    <TableCell className="font-medium">{connection.name}</TableCell>
+                    <TableCell>{connection.sector}</TableCell>
+                    <TableCell>{connection.founder}</TableCell>
+                    <TableCell>{connection.connected}</TableCell>
+                    <TableCell>{connection.meetings}</TableCell>
+                    <TableCell>
+                      <span className={`px-2 py-1 rounded-full text-xs ${
+                        connection.status === "Active" 
+                          ? "bg-green-100 text-green-800" 
+                          : "bg-red-100 text-red-800"
+                      }`}>
+                        {connection.status}
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
     </div>
   );
-};
+}
 
 export default PortfolioPerformance;

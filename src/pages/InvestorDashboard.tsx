@@ -24,7 +24,7 @@ import ConnectionsOverview from "@/components/dashboard/ConnectionsOverview";
 import InvestmentOpportunities from "@/components/dashboard/InvestmentOpportunities";
 import StartupDetails from "@/components/dashboard/StartupDetails";
 
-const InvestorDashboard = () => {
+function InvestorDashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header / Navigation */}
@@ -37,7 +37,7 @@ const InvestorDashboard = () => {
               </Button>
             </Link>
             <h1 className="text-xl font-bold">
-              Investor<span className="text-[#ff4141]">Dashboard</span>
+              Visionaries<span className="text-[#ff4141]">Connect</span>
             </h1>
           </div>
           <div className="flex items-center gap-2">
@@ -79,7 +79,7 @@ const InvestorDashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Saved Opportunities
+                Potential Matches
               </CardTitle>
               <BarChart3 className="h-4 w-4 text-[#ff4141]" />
             </CardHeader>
@@ -109,7 +109,7 @@ const InvestorDashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Founders Network
+                Network Size
               </CardTitle>
               <Handshake className="h-4 w-4 text-[#ff4141]" />
             </CardHeader>
@@ -145,6 +145,6 @@ const InvestorDashboard = () => {
       </main>
     </div>
   );
-};
+}
 
 export default InvestorDashboard;

@@ -70,21 +70,21 @@ const connectionsData = [
   },
 ];
 
-const ConnectionsOverview = () => {
+function ConnectionsOverview() {
   // Vanilla JS functions
   function handleScheduleCall(name) {
-    console.log(`Scheduling call with ${name}`);
+    console.log("Scheduling call with " + name);
     // Here you would typically open a scheduling modal or redirect
   }
 
   function handleMessageFounder(name) {
-    console.log(`Messaging ${name}`);
+    console.log("Messaging " + name);
     // Here you would typically open a messaging interface
   }
 
   // Format tooltip values function for the chart
   function formatTooltipValue(value) {
-    return [`${value}%`, 'Interest'];
+    return [value + "%", "Interest"];
   }
 
   return (
@@ -98,51 +98,53 @@ const ConnectionsOverview = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {connectionsData.slice(0, 3).map((connection, idx) => (
-                <div key={idx} className="flex items-start p-3 rounded-lg border">
-                  <div className="h-10 w-10 bg-[#ff4141]/10 rounded-full flex items-center justify-center mr-3">
-                    <Handshake className="h-5 w-5 text-[#ff4141]" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-medium text-sm">{connection.name}</h4>
-                        <p className="text-xs text-gray-500">{connection.founder} - {connection.industry}</p>
+              {connectionsData.slice(0, 3).map(function(connection, idx) {
+                return (
+                  <div key={idx} className="flex items-start p-3 rounded-lg border">
+                    <div className="h-10 w-10 bg-[#ff4141]/10 rounded-full flex items-center justify-center mr-3">
+                      <Handshake className="h-5 w-5 text-[#ff4141]" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-medium text-sm">{connection.name}</h4>
+                          <p className="text-xs text-gray-500">{connection.founder} - {connection.industry}</p>
+                        </div>
+                        <span className={`text-xs px-2 py-1 rounded-full ${
+                          connection.status === "New" 
+                            ? "bg-green-100 text-green-800" 
+                            : connection.status === "Active" 
+                            ? "bg-blue-100 text-blue-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}>
+                          {connection.status}
+                        </span>
                       </div>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        connection.status === "New" 
-                          ? "bg-green-100 text-green-800" 
-                          : connection.status === "Active" 
-                          ? "bg-blue-100 text-blue-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}>
-                        {connection.status}
-                      </span>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-1">Last contact: {connection.lastContact}</p>
-                    <div className="flex gap-2 mt-2">
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="text-xs h-8"
-                        onClick={() => handleMessageFounder(connection.founder)}
-                      >
-                        <MessageSquare className="h-3 w-3 mr-1" />
-                        Message
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="text-xs h-8"
-                        onClick={() => handleScheduleCall(connection.founder)}
-                      >
-                        <Calendar className="h-3 w-3 mr-1" />
-                        Schedule
-                      </Button>
+                      <p className="text-xs text-gray-500 mt-1">Last contact: {connection.lastContact}</p>
+                      <div className="flex gap-2 mt-2">
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="text-xs h-8"
+                          onClick={function() { handleMessageFounder(connection.founder); }}
+                        >
+                          <MessageSquare className="h-3 w-3 mr-1" />
+                          Message
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="text-xs h-8"
+                          onClick={function() { handleScheduleCall(connection.founder); }}
+                        >
+                          <Calendar className="h-3 w-3 mr-1" />
+                          Schedule
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               <Button variant="outline" className="w-full text-xs" size="sm">
                 View All Activity
               </Button>
@@ -168,12 +170,16 @@ const ConnectionsOverview = () => {
                     outerRadius={80}
                     paddingAngle={2}
                     dataKey="value"
-                    label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    label={function(entry) {
+                      return entry.name + " " + entry.value + "%";
+                    }}
                     labelLine={false}
                   >
-                    {industryData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
+                    {industryData.map(function(entry, index) {
+                      return (
+                        <Cell key={"cell-" + index} fill={COLORS[index % COLORS.length]} />
+                      );
+                    })}
                   </Pie>
                   <Tooltip 
                     formatter={formatTooltipValue}
@@ -204,51 +210,53 @@ const ConnectionsOverview = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {connectionsData.map((connection, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{connection.name}</TableCell>
-                  <TableCell>{connection.industry}</TableCell>
-                  <TableCell>{connection.founder}</TableCell>
-                  <TableCell>
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      connection.status === "New" 
-                        ? "bg-green-100 text-green-800" 
-                        : connection.status === "Active" 
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}>
-                      {connection.status}
-                    </span>
-                  </TableCell>
-                  <TableCell>{connection.lastContact}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className="h-8 w-8 p-0"
-                        onClick={() => handleMessageFounder(connection.founder)}
-                      >
-                        <MessageSquare className="h-4 w-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className="h-8 w-8 p-0"
-                        onClick={() => handleScheduleCall(connection.founder)}
-                      >
-                        <Calendar className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {connectionsData.map(function(connection, index) {
+                return (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{connection.name}</TableCell>
+                    <TableCell>{connection.industry}</TableCell>
+                    <TableCell>{connection.founder}</TableCell>
+                    <TableCell>
+                      <span className={`px-2 py-1 rounded-full text-xs ${
+                        connection.status === "New" 
+                          ? "bg-green-100 text-green-800" 
+                          : connection.status === "Active" 
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}>
+                        {connection.status}
+                      </span>
+                    </TableCell>
+                    <TableCell>{connection.lastContact}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-8 w-8 p-0"
+                          onClick={function() { handleMessageFounder(connection.founder); }}
+                        >
+                          <MessageSquare className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-8 w-8 p-0"
+                          onClick={function() { handleScheduleCall(connection.founder); }}
+                        >
+                          <Calendar className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
     </div>
   );
-};
+}
 
 export default ConnectionsOverview;
